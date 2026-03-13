@@ -1,0 +1,27 @@
+<div class="detail-header">
+  <h1><%= @the_note.title %></h1>
+  <p class="detail-meta"><strong>Market Date:</strong> <%= @the_note.market_date %> &middot; <strong>Created:</strong> <%= time_ago_in_words(@the_note.created_at) %> ago</p>
+</div>
+
+<h2>Note</h2>
+<div class="detail-body"><%= @the_note.body %></div>
+
+<div class="detail-section">
+  <h2>Related Insights</h2>
+  <% if @the_note.insights.any? %>
+    <% @the_note.insights.each do |an_insight| %>
+      <div class="card">
+        <span class="badge <%= badge_class_for(an_insight.category) %>"><%= an_insight.category %></span>
+        <a href="/insights/<%= an_insight.id %>"><%= an_insight.title %></a>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="detail-meta"><em>No insights linked to this note yet.</em></p>
+  <% end %>
+</div>
+
+<div class="btn-group">
+  <a href="/notes/<%= @the_note.id %>/edit" class="btn btn-secondary">Edit Note</a>
+  <a href="/notes/<%= @the_note.id %>/delete" class="btn btn-danger">Delete Note</a>
+  <a href="/notes" class="btn btn-secondary">Back to All Notes</a>
+</div>

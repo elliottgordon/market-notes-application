@@ -1,0 +1,29 @@
+<div class="section-header">
+  <h1>My Insights</h1>
+  <a href="/generate_insights" class="btn btn-accent">Generate New Insights</a>
+</div>
+
+<div class="filter-bar">
+  <strong>Filter:</strong>
+  <a href="/insights">All</a>
+  <a href="/insights?category=trend">Trends</a>
+  <a href="/insights?category=trade+opportunity">Trade Opps</a>
+  <a href="/insights?category=risk+alert">Risk Alerts</a>
+  <a href="/insights?category=correlation">Correlations</a>
+  <a href="/insights?category=anomaly">Anomalies</a>
+</div>
+
+<hr>
+
+<% @list_of_insights.each do |an_insight| %>
+  <div class="card">
+    <span class="badge <%= badge_class_for(an_insight.category) %>"><%= an_insight.category %></span>
+    <h3><a href="/insights/<%= an_insight.id %>"><%= an_insight.title %></a></h3>
+    <p><%= an_insight.body.to_s.truncate(150) %></p>
+    <p class="card-meta"><%= an_insight.notes.count %> source notes &middot; Generated <%= time_ago_in_words(an_insight.created_at) %> ago</p>
+  </div>
+<% end %>
+
+<div class="btn-group">
+  <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+</div>

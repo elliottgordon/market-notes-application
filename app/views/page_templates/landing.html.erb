@@ -1,0 +1,28 @@
+<div class="hero">
+  <h1>Market Synthesis</h1>
+  <p>Capture your daily market observations. Let AI synthesize them into actionable insights over time.</p>
+
+  <div class="hero-steps">
+    <div class="step">
+      <span class="step-number">1</span>
+      <p>Write your daily market notes — what you're observing, what you believe, what's happening.</p>
+    </div>
+    <div class="step">
+      <span class="step-number">2</span>
+      <p>AI synthesizes your notes into clear insights, categorized as trends or trade opportunities.</p>
+    </div>
+    <div class="step">
+      <span class="step-number">3</span>
+      <p>Keep adding notes daily. Your insights evolve and adapt as your observations grow.</p>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <% if current_user.present? %>
+      <a href="/dashboard" class="btn btn-primary">Go to Dashboard</a>
+    <% else %>
+      <a href="/users/sign_up" class="btn btn-primary">Get Started — Sign Up</a>
+      <a href="/users/sign_in" class="btn btn-secondary">Sign In</a>
+    <% end %>
+  </div>
+</div>

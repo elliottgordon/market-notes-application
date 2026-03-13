@@ -1,0 +1,16 @@
+<div class="section-header">
+  <h1>My Market Notes</h1>
+  <a href="/notes/new" class="btn btn-primary">+ Write New Note</a>
+</div>
+
+<hr>
+
+<% @list_of_notes.each do |a_note| %>
+  <div class="card">
+    <h3><a href="/notes/<%= a_note.id %>"><%= a_note.title %></a></h3>
+    <p class="card-meta"><%= a_note.market_date %></p>
+    <p><%= a_note.body.to_s.truncate(150) %></p>
+  </div>
+<% end %>
+
+<a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>

@@ -1,0 +1,32 @@
+<div class="detail-header">
+  <h1><%= @the_insight.title %></h1>
+  <p class="detail-meta">
+    <span class="badge <%= badge_class_for(@the_insight.category) %>"><%= @the_insight.category %></span>
+    &middot; Generated <%= time_ago_in_words(@the_insight.created_at) %> ago
+    &middot; Based on <%= @the_insight.notes.count %> notes
+  </p>
+</div>
+
+<h2>Insight</h2>
+<div class="detail-body"><%= @the_insight.body %></div>
+
+<div class="detail-section">
+  <h2>Source Notes</h2>
+  <p class="detail-meta">The notes that informed this insight:</p>
+  <% if @the_insight.notes.any? %>
+    <% @the_insight.notes.each do |a_note| %>
+      <div class="card">
+        <a href="/notes/<%= a_note.id %>"><%= a_note.title %></a>
+        <p class="card-meta"><%= a_note.market_date %></p>
+        <p><%= a_note.body.to_s.truncate(100) %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="detail-meta"><em>No source notes linked to this insight.</em></p>
+  <% end %>
+</div>
+
+<div class="btn-group">
+  <a href="/insights/<%= @the_insight.id %>/delete" class="btn btn-danger">Delete Insight</a>
+  <a href="/insights" class="btn btn-secondary">Back to All Insights</a>
+</div>

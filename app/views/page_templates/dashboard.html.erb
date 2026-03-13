@@ -1,0 +1,77 @@
+<h1>Dashboard</h1>
+<p class="detail-meta">Welcome back, <%= current_user.username %>!</p>
+
+<%
+  last_insight = current_user.insights.order(created_at: :desc).first
+  if last_insight.present?
+    unsynthesized_count = current_user.notes.where("created_at > ?", last_insight.created_at).count
+    last_synthesis_time = time_ago_in_words(last_insight.created_at) + " ago"
+  else
+    unsynthesized_count = current_user.notes.count
+    last_synthesis_time = "Never"
+  end
+%>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-value"><%= current_user.notes.count %></div>
+    <div class="stat-label">Total Notes</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value"><%= current_user.insights.count %></div>
+    <div class="stat-label">Total Insights</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: <%= unsynthesized_count > 0 ? '#d29922' : '#3fb950' %>;"><%= unsynthesized_count %></div>
+    <div class="stat-label">Unsynthesized Notes</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="font-size: 1rem;"><%= last_synthesis_time %></div>
+    <div class="stat-label">Last Synthesis</div>
+  </div>
+</div>
+
+<% if unsynthesized_count > 0 %>
+  <div class="card" style="border-color: #d29922;">
+    <p>You have <strong><%= unsynthesized_count %> new note<%= unsynthesized_count > 1 ? 's' : '' %></strong> since your last synthesis. Ready to generate insights?</p>
+    <div class="btn-group" style="margin-top: 0.5rem;">
+      <a href="/generate_insights" class="btn btn-accent">Generate Insights from <%= unsynthesized_count %> New Notes</a>
+      <a href="/notes/new" class="btn btn-secondary">+ Write Another Note First</a>
+    </div>
+  </div>
+<% else %>
+  <div class="btn-group">
+    <a href="/notes/new" class="btn btn-primary">+ Write New Market Note</a>
+  </div>
+  <p class="detail-meta" style="margin-top: 0.5rem;">Write some new notes, then come back to synthesize them into insights.</p>
+<% end %>
+
+<hr>
+
+<div class="section-header">
+  <h2>Recent Notes</h2>
+  <a href="/notes" class="btn btn-secondary">View All</a>
+</div>
+
+<% current_user.notes.order(created_at: :desc).limit(3).each do |a_note| %>
+  <div class="card">
+    <h3><a href="/notes/<%= a_note.id %>"><%= a_note.title %></a></h3>
+    <p class="card-meta"><%= a_note.market_date %></p>
+    <p><%= a_note.body.to_s.truncate(120) %></p>
+  </div>
+<% end %>
+
+<hr>
+
+<div class="section-header">
+  <h2>Latest Insights</h2>
+  <a href="/insights" class="btn btn-secondary">View All</a>
+</div>
+
+<% current_user.insights.order(created_at: :desc).limit(3).each do |an_insight| %>
+  <div class="card">
+    <span class="badge <%= badge_class_for(an_insight.category) %>"><%= an_insight.category %></span>
+    <h3><a href="/insights/<%= an_insight.id %>"><%= an_insight.title %></a></h3>
+    <p><%= an_insight.body.to_s.truncate(120) %></p>
+  </div>
+<% end %>

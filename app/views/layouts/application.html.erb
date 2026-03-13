@@ -23,6 +23,34 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar">
+      <a href="/" class="navbar-brand">Market Synthesis</a>
+
+      <div class="navbar-links">
+        <% if current_user.present? %>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/notes">My Notes</a>
+          <a href="/insights">My Insights</a>
+          <a href="/users/edit">Profile</a>
+          <a href="/users/sign_out">Sign Out</a>
+          <span class="navbar-user"><%= current_user.email %></span>
+        <% else %>
+          <a href="/users/sign_up">Sign Up</a>
+          <a href="/users/sign_in">Sign In</a>
+        <% end %>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <% if notice.present? %>
+        <div class="flash flash-notice"><%= notice %></div>
+      <% end %>
+
+      <% if alert.present? %>
+        <div class="flash flash-alert"><%= alert %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

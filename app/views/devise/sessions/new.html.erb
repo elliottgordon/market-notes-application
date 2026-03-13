@@ -1,0 +1,39 @@
+<h1>Sign In</h1>
+
+<hr>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-group">
+    <label for="user_email">Email</label>
+    <%= f.email_field :email, id: "user_email", autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="form-group">
+    <label for="user_password">Password</label>
+    <%= f.password_field :password, id: "user_password", autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="form-group">
+      <label>
+        <%= f.check_box :remember_me %> Remember me
+      </label>
+    </div>
+  <% end %>
+
+  <div class="btn-group">
+    <%= f.submit "Sign In" %>
+  </div>
+<% end %>
+
+<hr>
+
+<p class="detail-meta">
+  Don't have an account? <a href="/users/sign_up">Sign Up</a>
+</p>
+
+<% if devise_mapping.recoverable? %>
+  <p class="detail-meta">
+    <a href="<%= new_password_path(resource_name) %>">Forgot your password?</a>
+  </p>
+<% end %>
