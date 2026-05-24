@@ -3,6 +3,7 @@
 set -o errexit
 
 bundle install
-SECRET_KEY_BASE_DUMMY=1 bundle exec rake assets:precompile
+export SECRET_KEY_BASE=$(openssl rand -hex 64)
+bundle exec rake assets:precompile
 bundle exec rake assets:clean
 bundle exec rake db:migrate
