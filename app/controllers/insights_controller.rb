@@ -8,6 +8,13 @@ class InsightsController < ApplicationController
 
     @list_of_insights = matching_insights.order({ :created_at => :desc })
 
+    last_insight = current_user.insights.order(created_at: :desc).first
+    @notes_since_synthesis = if last_insight.present?
+      current_user.notes.where("created_at > ?", last_insight.created_at).count
+    else
+      current_user.notes.count
+    end
+
     render({ :template => "insight_templates/index" })
   end
 

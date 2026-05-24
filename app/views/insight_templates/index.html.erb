@@ -1,6 +1,13 @@
 <div class="section-header">
   <h1>My Insights</h1>
-  <a href="/generate_insights" class="btn btn-accent">Generate New Insights</a>
+  <div class="generate-insights-area">
+    <% if @notes_since_synthesis >= 5 %>
+      <p class="synthesis-ready" style="margin-bottom: 0.4rem;"><%= @notes_since_synthesis %> new notes ready — time to synthesize</p>
+    <% else %>
+      <p class="synthesis-pending" style="margin-bottom: 0.4rem;"><%= @notes_since_synthesis %> of 5 notes until next synthesis</p>
+    <% end %>
+    <a href="/generate_insights" class="btn btn-accent">Generate New Insights</a>
+  </div>
 </div>
 
 <div class="filter-bar">

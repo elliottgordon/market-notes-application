@@ -254,7 +254,7 @@ hr { border: none; border-top: 1px solid #21262d; margin: 1.2rem 0; }
 
 .form-group label {
   display: block;
-  color: #c9d1d9;
+  color: #e6edf3;
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -460,6 +460,72 @@ button:hover, input[type="submit"]:hover {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
+}
+
+/* ===== NOTE SECTION FORM ===== */
+.note-section-group {
+  border-top: 1px solid #21262d;
+  padding-top: 1rem;
+  margin-bottom: 0;
+}
+
+.note-section-group .form-group {
+  margin-bottom: 0;
+}
+
+.note-section-group:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.section-hint {
+  color: #8b949e;
+  font-size: 0.8rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.1rem;
+}
+
+.note-section-group .form-group textarea {
+  min-height: unset;
+}
+
+/* ===== SYNTHESIS COUNTER ===== */
+.synthesis-counter {
+  margin-top: 0.6rem;
+}
+
+.synthesis-counter-bar {
+  height: 4px;
+  background-color: #21262d;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.35rem;
+}
+
+.synthesis-counter-fill {
+  height: 100%;
+  background-color: #8b949e;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.synthesis-counter-fill--ready {
+  background-color: #3fb950;
+}
+
+.synthesis-ready {
+  color: #3fb950;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.synthesis-pending {
+  color: #8b949e;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.generate-insights-area {
+  text-align: right;
 }
 
 /* ===== RESPONSIVE ===== */
